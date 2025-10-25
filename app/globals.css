@@ -24,3 +24,49 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* use the variable injected by next/font (italiana.variable added on <body>) */
+.font-italiana {
+  font-family: var(--font-italiana), Georgia, serif;
+  font-weight: 400; /* Italiana only has 400 */
+  font-style: normal;
+}
+.font-italiana2 {
+  font-family: var(--font-italiana2), Georgia, serif;
+  font-weight: 400; /* Italiana only has 400 */
+  font-style: normal;
+}
+
+/* Hide scrollbars globally but keep scrolling functional */
+/* For WebKit (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge Legacy */
+}
+
+/* Optional: if you want to specifically hide only on desktop, you can use media queries */
+@media (min-width: 640px) {
+  html, body {
+    overflow-y: auto;
+  }
+}
+
+/* Infinite horizontal scroll animation for logo marquee */
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  display: inline-flex;
+  gap: 4rem;
+  align-items: center;
+  animation: scroll 40s linear infinite; /* <- change this value (e.g. 40s) */
+  will-change: transform;
+}
