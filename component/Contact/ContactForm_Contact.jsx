@@ -106,8 +106,8 @@ const ContactForm_Contact = () => {
                                     <h3 className='text-white font-semibold mb-2'>Location</h3>
                                     <p className='text-white/90'>
                                         RK Studio<br />
-                                        1234 Main Street, Suite 101<br />
-                                        Metropolis, NY 10001
+                                        Krishna nagar, Rangbari, Kota<br />
+                                        Rajasthan, India 324010
                                     </p>
                                 </div>
                             </div>
@@ -115,8 +115,7 @@ const ContactForm_Contact = () => {
                             <div>
                                 <h3 className='text-white font-semibold mb-2'>Business Hour</h3>
                                 <p className='text-white/90'>
-                                    Monday - Friday: 9 AM - 6 PM<br />
-                                    Saturday: 10 AM - 4 PM<br />
+                                    Monday - Saturday: 10 AM - 8 PM<br />
                                     Sunday: Closed
                                 </p>
                             </div>

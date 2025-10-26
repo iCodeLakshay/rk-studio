@@ -18,7 +18,7 @@ const Footer = () => {
   const studios = [
     {
       name: "RK Studio",
-      address: "1234 Main Street, Suite 101, Metropolis, NY 10001",
+      address: "Krishna nagar, Rangbari, Kota, Rajasthan 324010",
       phone: "+91 80030 56563",
       email: "rk.photography800@gmail.com"
     },

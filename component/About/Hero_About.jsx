@@ -18,29 +18,29 @@ const Hero_About = () => {
       </div>
 
       {/* Video Section */}
-      <div className='relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden'>
+      <div className='relative w-full h-[400px] md:h-[500px] lg:h-[50rem] overflow-hidden'>
         {/* Video Element - Replace src with your video URL */}
         <video
-          className='w-full h-full object-cover'
+          className='w-full h-full object-cover object-start'
           autoPlay
           loop
           muted
           playsInline
-          poster="/placeholder.svg" // Fallback image while video loads
+          poster="/placeholder.svg"
         >
-          <source src="/your-video-url.mp4" type="video/mp4" />
+          <source src="/video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
         {/* Play Button Overlay (Optional - for visual effect) */}
-        <div className='absolute inset-0 flex items-center justify-center'>
+        {/* <div className='absolute inset-0 flex items-center justify-center'>
           <button 
             className='w-14 h-14 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 transition-transform'
             aria-label='Play video'
           >
             <FaPlay className='w-4 h-4 md:w-7 md:h-7 text-gray-800 ml-1' /> 
           </button>
-        </div>
+        </div> */}
 
         {/* Optional: Dark overlay for better contrast */}
         <div className='absolute inset-0 bg-black/10 pointer-events-none'></div>
