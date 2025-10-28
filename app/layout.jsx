@@ -5,6 +5,7 @@ import { Italiana } from 'next/font/google';
 import { Libre_Caslon_Display } from 'next/font/google';
 import Footer from "@/component/Footer";
 import { Toaster } from "react-hot-toast";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const italiana = Italiana({
   variable: "--font-italiana",
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <Toaster />
+         <SpeedInsights />
         <Footer />
       </body>
     </html>
