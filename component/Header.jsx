@@ -52,7 +52,7 @@ const Header = () => {
       </div>
 
       {/* Navigation Menu - Slides in from right */}
-      <nav className={`absolute top-10 right-0 w-35 md:w-44 bg-transparent h-50 transform transition-transform duration-300 ease-in-out translate-x-0`}>
+      <nav className={`absolute top-12 right-0 w-35 md:w-44 bg-transparent h-50 transform transition-transform duration-300 ease-in-out translate-x-0`}>
         <div className='flex flex-col w-fit items-center justify-center h-full'>
           <ul className={`flex flex-col gap-4 text-2xl tracking-wide text-start ${textColor}`}>
             <Link href='/'>
