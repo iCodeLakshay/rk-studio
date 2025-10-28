@@ -52,12 +52,12 @@ const Header = () => {
       </div>
 
       {/* Navigation Menu - Slides in from right */}
-      <nav className={`absolute top-10 right-0 w-35 md:w-44 bg-transparent h-50 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <nav className={`absolute top-10 right-0 w-35 md:w-44 bg-transparent h-50 transform transition-transform duration-300 ease-in-out translate-x-0`}>
         <div className='flex flex-col w-fit items-center justify-center h-full'>
           <ul className={`flex flex-col gap-4 text-2xl tracking-wide text-start ${textColor}`}>
             <Link href='/'>
               <li
-                className={`group cursor-pointer transition-all duration-300 text-[16px] ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
+                className={`group cursor-pointer transition-all duration-300 text-[16px] ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-5'}`}
                 style={{ transitionDelay: isMenuOpen ? '100ms' : '0ms' }}
               >
                 <span className='relative inline-block'>
