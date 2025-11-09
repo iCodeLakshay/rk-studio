@@ -1,6 +1,13 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useRef } from 'react'
+import { createScrollAnimation, createStaggerAnimation, animations } from '../../utils/gsap'
 
 const Process_Home = () => {
+  const sectionRef = useRef(null);
+  const badgeRef = useRef(null);
+  const titleRef = useRef(null);
+  const imageRef = useRef(null);
+  const stepsRef = useRef([]);
   const steps = [
     {
       number: '01',
@@ -29,15 +36,46 @@ const Process_Home = () => {
     }
   ]
 
+  useEffect(() => {
+    // Animate badge
+    if (badgeRef.current) {
+      createScrollAnimation(badgeRef.current, animations.scaleIn, {
+        scrollTrigger: { start: "top 85%" }
+      });
+    }
+
+    // Animate title
+    if (titleRef.current) {
+      createScrollAnimation(titleRef.current, animations.fadeInUp, {
+        scrollTrigger: { start: "top 80%" }
+      });
+    }
+
+    // Animate image
+    if (imageRef.current) {
+      createScrollAnimation(imageRef.current, animations.fadeInLeft, {
+        scrollTrigger: { start: "top 75%" }
+      });
+    }
+
+    // Animate steps with stagger
+    if (stepsRef.current.length > 0) {
+      createStaggerAnimation(stepsRef.current, animations.staggerFadeInUp, {
+        scrollTrigger: { start: "top 70%" },
+        stagger: 0.1
+      });
+    }
+  }, []);
+
   return (
-    <section className='w-full bg-[#F6F2EC] py-16 md:py-24 px-6 md:px-16 lg:px-24'>
+    <section ref={sectionRef} className='w-full bg-[#F6F2EC] py-16 md:py-24 px-6 md:px-16 lg:px-24'>
       <div className='max-w-7xl mx-auto'>
         {/* Header */}
         <div className='flex flex-col items-center text-center mb-10 md:mb-16'>
-          <div className='inline-block border-2 border-[#C4956B] rounded-full px-2 md:px-5 md:py-2 mb-6'>
+          <div ref={badgeRef} className='inline-block border-2 border-[#C4956B] rounded-full px-2 md:px-5 md:py-2 mb-6'>
             <span className='text-[#C4956B] text-[10px] md:text-sm tracking-wider font-medium'>PROCESS</span>
           </div>
-          <h2 className='font-italiana text-[#4A3B35] text-3xl md:text-4xl lg:text-5xl'>
+          <h2 ref={titleRef} className='font-italiana text-[#4A3B35] text-3xl md:text-4xl lg:text-5xl'>
             HOW OUR CREATIVE
             <br /> TEAM WORKS
           </h2>
@@ -47,7 +85,7 @@ const Process_Home = () => {
         <div className='flex flex-col lg:flex-row gap-8 items-start'>
           {/* Image Column */}
           <div className='w-full lg:w-1/2'>
-            <div className='bg-gray-200 overflow-hidden'>
+            <div ref={imageRef} className='bg-gray-200 overflow-hidden'>
               {/* Replace this img src with your own image path */}
               <img src='/process.png' alt='Process' className='w-full h-auto md:h-[36rem] object-cover' />
             </div>
@@ -57,7 +95,11 @@ const Process_Home = () => {
           <div className='w-full lg:w-1/2'>
             <div className='flex flex-col gap-6'>
               {steps.map((step, idx) => (
-                <div key={idx} className='flex gap-6 items-start'>
+                <div 
+                  key={idx}
+                  ref={el => stepsRef.current[idx] = el}
+                  className='flex gap-6 items-start'
+                >
                   <div className='flex-shrink-0'>
                     <div className='w-10 h-10 rounded-full bg-white border border-[#E0B98E] flex items-center justify-center text-[#4A3B35] font-semibold'>
                       {step.number}

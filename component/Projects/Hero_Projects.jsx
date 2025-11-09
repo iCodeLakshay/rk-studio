@@ -1,12 +1,36 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectFade, Pagination, Autoplay } from 'swiper/modules'
+import { createScrollAnimation, animations } from '../../utils/gsap'
 import 'swiper/css'
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination'
 
 const Hero_Projects = () => {
+  const titleRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const swiperRef = useRef(null);
+
+  useEffect(() => {
+    if (titleRef.current) {
+      createScrollAnimation(titleRef.current, animations.fadeInUp, {
+        scrollTrigger: { start: "top 85%" }
+      });
+    }
+
+    if (descriptionRef.current) {
+      createScrollAnimation(descriptionRef.current, animations.fadeInUp, {
+        scrollTrigger: { start: "top 80%", delay: 0.3 }
+      });
+    }
+
+    if (swiperRef.current) {
+      createScrollAnimation(swiperRef.current, animations.scaleIn, {
+        scrollTrigger: { start: "top 75%" }
+      });
+    }
+  }, []);
   const projects = [
     {
       id: 1,
@@ -43,11 +67,11 @@ const Hero_Projects = () => {
       {/* Header Section */}
       <div className='pb-15 pt-30 px-8 md:px-16 lg:px-24'>
         <div className='max-w-7xl mx-auto text-center'>
-          <h1 className='font-italiana text-[#4A3B35] text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight'>
+          <h1 ref={titleRef} className='font-italiana text-[#4A3B35] text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight'>
             <span className='text-[#C4956B]'>TIMELESS</span> MOMENTS,<br />
             MASTERFULLY CAPTURED
           </h1>
-          <p className='text-[#6B5D54] text-base md:text-lg max-w-3xl mx-auto'>
+          <p ref={descriptionRef} className='text-[#6B5D54] text-base md:text-lg max-w-3xl mx-auto'>
             Explore the diverse range of photography projects we've brought to life<br className='hidden md:block' />
             for our clients.
           </p>
@@ -55,7 +79,7 @@ const Hero_Projects = () => {
       </div>
 
       {/* Carousel Section */}
-      <div className='relative'>
+      <div ref={swiperRef} className='relative'>
         <Swiper
           modules={[EffectFade, Pagination, Autoplay]}
           spaceBetween={30}

@@ -1,7 +1,20 @@
+'use client'
 import Image from 'next/image';
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { createScrollAnimation, animations } from '../../utils/gsap'
 
 const MovingStripe_Home = () => {
+  const sectionRef = useRef(null);
+  const stripeRef = useRef(null);
+
+  useEffect(() => {
+    // Animate the entire stripe section
+    if (sectionRef.current) {
+      createScrollAnimation(sectionRef.current, animations.fadeInUp, {
+        scrollTrigger: { start: "top 90%" }
+      });
+    }
+  }, []);
   // Logo data - duplicate this array to create seamless loop
   const logos = [
     { name: "Logo 1", image: "/brands/canon.png" },
@@ -12,10 +25,11 @@ const MovingStripe_Home = () => {
   ];
 
   return (
-    <section className='bg-[#F6F2EC] py-6 md:py-12 overflow-hidden'>
+    <section ref={sectionRef} className='bg-[#F6F2EC] py-6 md:py-12 overflow-hidden'>
       <div className='relative flex'>
         {/* Animated wrapper containing all logo sets */}
         <div
+          ref={stripeRef}
           className='flex items-center gap-16 animate-scroll'
           style={{ animationDuration: '40s' }} // <- override here (e.g. '40s' or '60s')
         >

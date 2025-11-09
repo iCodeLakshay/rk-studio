@@ -1,9 +1,35 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import toast from 'react-hot-toast';
 import {  FaInstagram, FaYoutube } from "react-icons/fa";
+import { createScrollAnimation, createStaggerAnimation, animations } from '../../utils/gsap'
 
 const ContactForm_Contact = () => {
+    const sectionRef = useRef(null);
+    const formRef = useRef(null);
+    const infoRef = useRef(null);
+    const fieldsRef = useRef([]);
+
+    useEffect(() => {
+        if (formRef.current) {
+            createScrollAnimation(formRef.current, animations.fadeInLeft, {
+                scrollTrigger: { start: "top 80%" }
+            });
+        }
+
+        if (infoRef.current) {
+            createScrollAnimation(infoRef.current, animations.fadeInRight, {
+                scrollTrigger: { start: "top 80%" }
+            });
+        }
+
+        if (fieldsRef.current.length > 0) {
+            createStaggerAnimation(fieldsRef.current, animations.staggerFadeInUp, {
+                scrollTrigger: { start: "top 70%" },
+                stagger: 0.1
+            });
+        }
+    }, []);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -61,11 +87,11 @@ const ContactForm_Contact = () => {
     }
 
     return (
-        <section className='w-full bg-[#B17B6B] py-16 md:py-24 px-6 md:px-16 lg:px-24'>
+        <section ref={sectionRef} className='w-full bg-[#B17B6B] py-16 md:py-24 px-6 md:px-16 lg:px-24'>
             <div className='max-w-7xl mx-auto'>
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16'>
                     {/* Left Side - Contact Information */}
-                    <div className='text-white'>
+                    <div ref={infoRef} className='text-white'>
                         {/* Badge */}
                         <div className='inline-block border-2 border-white/50 rounded-full px-5 py-2 mb-6'>
                             <span className='text-white text-sm tracking-wider font-medium'>CONTACT US</span>
@@ -146,10 +172,10 @@ const ContactForm_Contact = () => {
                     </div>
 
                     {/* Right Side - Contact Form */}
-                    <div className='bg-[#F6F2EC] rounded-lg p-8 md:p-10'>
+                    <div ref={formRef} className='bg-[#F6F2EC] rounded-lg p-8 md:p-10'>
                         <form onSubmit={handleSubmit} className='space-y-6'>
                             {/* Name */}
-                            <div>
+                            <div ref={el => fieldsRef.current[0] = el}>
                                 <label htmlFor='name' className='block text-[#4A3B35] text-sm font-medium mb-2'>
                                     Name
                                 </label>
@@ -166,7 +192,7 @@ const ContactForm_Contact = () => {
                             </div>
 
                             {/* Email */}
-                            <div>
+                            <div ref={el => fieldsRef.current[1] = el}>
                                 <label htmlFor='email' className='block text-[#4A3B35] text-sm font-medium mb-2'>
                                     Email
                                 </label>
@@ -183,7 +209,7 @@ const ContactForm_Contact = () => {
                             </div>
 
                             {/* Phone */}
-                            <div>
+                            <div ref={el => fieldsRef.current[2] = el}>
                                 <label htmlFor='phone' className='block text-[#4A3B35] text-sm font-medium mb-2'>
                                     Phone
                                 </label>
@@ -199,7 +225,7 @@ const ContactForm_Contact = () => {
                             </div>
 
                             {/* Session Type */}
-                            <div>
+                            <div ref={el => fieldsRef.current[3] = el}>
                                 <label htmlFor='sessionType' className='block text-[#4A3B35] text-sm font-medium mb-2'>
                                     Session Type
                                 </label>
@@ -222,7 +248,7 @@ const ContactForm_Contact = () => {
                             </div>
 
                             {/* Message */}
-                            <div>
+                            <div ref={el => fieldsRef.current[4] = el}>
                                 <label htmlFor='message' className='block text-[#4A3B35] text-sm font-medium mb-2'>
                                     Message
                                 </label>
@@ -239,7 +265,7 @@ const ContactForm_Contact = () => {
                             </div>
 
                             {/* Preferred Date & Time */}
-                            <div>
+                            <div ref={el => fieldsRef.current[5] = el}>
                                 <label className='block text-[#4A3B35] text-sm font-medium mb-2'>
                                     Preferred Date & Time
                                 </label>
@@ -263,6 +289,7 @@ const ContactForm_Contact = () => {
 
                             {/* Submit Button */}
                             <button
+                                ref={el => fieldsRef.current[6] = el}
                                 type='submit'
                                 disabled={isSubmitting}
                                 className='w-full bg-[#8B5A47] text-white py-3 rounded-md hover:bg-[#6F4838] transition-colors font-medium text-base disabled:bg-gray-400 disabled:cursor-not-allowed'

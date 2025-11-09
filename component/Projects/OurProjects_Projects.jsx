@@ -1,6 +1,33 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useRef } from 'react'
+import { createScrollAnimation, createStaggerAnimation, animations } from '../../utils/gsap'
 
 const OurProjects_Projects = () => {
+  const sectionRef = useRef(null);
+  const badgeRef = useRef(null);
+  const titleRef = useRef(null);
+  const projectsRef = useRef([]);
+
+  useEffect(() => {
+    if (badgeRef.current) {
+      createScrollAnimation(badgeRef.current, animations.scaleIn, {
+        scrollTrigger: { start: "top 85%" }
+      });
+    }
+
+    if (titleRef.current) {
+      createScrollAnimation(titleRef.current, animations.fadeInUp, {
+        scrollTrigger: { start: "top 80%" }
+      });
+    }
+
+    if (projectsRef.current.length > 0) {
+      createStaggerAnimation(projectsRef.current, animations.staggerFadeInUp, {
+        scrollTrigger: { start: "top 70%" },
+        stagger: 0.15
+      });
+    }
+  }, []);
   const projects = [
     {
       id: 1,
@@ -53,23 +80,24 @@ const OurProjects_Projects = () => {
   ]
 
   return (
-    <section className='w-full bg-[#F6F2EC] py-16 md:py-24 px-6 md:px-16 lg:px-24'>
+    <section ref={sectionRef} className='w-full bg-[#F6F2EC] py-16 md:py-24 px-6 md:px-16 lg:px-24'>
       <div className='max-w-7xl mx-auto'>
         {/* Header */}
         <div className='flex flex-col items-center text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16'>
-          <div className='inline-block border-2 border-[#C4956B] rounded-full px-4 sm:px-5 py-1.5 sm:py-2 mb-4 sm:mb-5 md:mb-6'>
+          <div ref={badgeRef} className='inline-block border-2 border-[#C4956B] rounded-full px-4 sm:px-5 py-1.5 sm:py-2 mb-4 sm:mb-5 md:mb-6'>
             <span className='text-[#C4956B] text-xs sm:text-sm tracking-wider font-medium'>PROJECTS</span>
           </div>
-          <h2 className='font-italiana text-[#4A3B35] text-3xl sm:text-4xl md:text-5xl lg:text-6xl'>
+          <h2 ref={titleRef} className='font-italiana text-[#4A3B35] text-3xl sm:text-4xl md:text-5xl lg:text-6xl'>
             OUR PROJECTS
           </h2>
         </div>
 
         {/* Projects Grid */}
         <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10'>
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <div 
-              key={project.id} 
+              key={project.id}
+              ref={el => projectsRef.current[index] = el}
               className='group cursor-pointer'
             >
               {/* Image Container */}

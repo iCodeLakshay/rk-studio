@@ -11,7 +11,7 @@ const page = () => {
     <div>
       <Hero_About />
       <WhyUs_About />
-      <OurTeam_About />
+      {/* <OurTeam_About /> */}
       <MovingStripe_Home />
       <Testimonial_Home />
       <CTA_About />

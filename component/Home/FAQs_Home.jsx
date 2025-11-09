@@ -1,8 +1,37 @@
-"use client"
-import React, { useState } from 'react'
+'use client'
+import React, { useState, useEffect, useRef } from 'react'
+import { createScrollAnimation, createStaggerAnimation, animations } from '../../utils/gsap'
 
 const FAQs_Home = () => {
+  const sectionRef = useRef(null);
+  const badgeRef = useRef(null);
+  const titleRef = useRef(null);
+  const faqItemsRef = useRef([]);
   const [openIndex, setOpenIndex] = useState(0); // First item open by default
+
+  useEffect(() => {
+    // Animate badge
+    if (badgeRef.current) {
+      createScrollAnimation(badgeRef.current, animations.scaleIn, {
+        scrollTrigger: { start: "top 85%" }
+      });
+    }
+
+    // Animate title
+    if (titleRef.current) {
+      createScrollAnimation(titleRef.current, animations.fadeInUp, {
+        scrollTrigger: { start: "top 80%" }
+      });
+    }
+
+    // Animate FAQ items with stagger
+    if (faqItemsRef.current.length > 0) {
+      createStaggerAnimation(faqItemsRef.current, animations.staggerFadeInUp, {
+        scrollTrigger: { start: "top 70%" },
+        stagger: 0.1
+      });
+    }
+  }, []);
 
   const faqs = [
     {
@@ -32,14 +61,14 @@ const FAQs_Home = () => {
   };
 
   return (
-    <section className='bg-[#f5f0eb] py-20 px-8 md:px-16 lg:px-24'>
+    <section ref={sectionRef} className='bg-[#f5f0eb] py-20 px-8 md:px-16 lg:px-24'>
       <div className='max-w-4xl mx-auto'>
         {/* Header */}
         <div className='text-center mb-16'>
-          <span className='inline-block border border-amber-600 text-amber-600 px-4 py-1 rounded-full text-sm mb-6 tracking-wide'>
+          <span ref={badgeRef} className='inline-block border border-amber-600 text-amber-600 px-4 py-1 rounded-full text-sm mb-6 tracking-wide'>
             FAQ
           </span>
-          <h2 className='font-italiana text-4xl md:text-5xl lg:text-6xl leading-tight text-gray-800'>
+          <h2 ref={titleRef} className='font-italiana text-4xl md:text-5xl lg:text-6xl leading-tight text-gray-800'>
             MOST ASKED QUESTIONS<br />
             BY OUR CLIENTS
           </h2>
@@ -49,6 +78,7 @@ const FAQs_Home = () => {
         <div className='space-y-4'>
           {faqs.map((faq, index) => (
             <div 
+              ref={el => faqItemsRef.current[index] = el} 
               key={index}
               className='border-b border-gray-300 pb-4'
             >
