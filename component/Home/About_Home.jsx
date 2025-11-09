@@ -15,9 +15,9 @@ const About_Home = () => {
 
   // Stats data
   const stats = [
-    { number: "56+", label: "Years of Experience" },
-    { number: "450+", label: "Projects Nicely Done" },
-    { number: "4.9%", label: "Clients' Satisfaction Rate" }
+    { number: "6+", label: "Years of Experience" },
+    { number: "45+", label: "Projects Nicely Done" },
+    { number: "4.9%", label: "Clients' Satisfaction Rate (out of 5)" }
   ];
 
   useEffect(() => {
