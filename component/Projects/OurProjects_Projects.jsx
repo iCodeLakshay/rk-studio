@@ -115,11 +115,11 @@ const OurProjects_Projects = () => {
         </div>
 
         {/* Optional: Load More Button */}
-        <div className='flex justify-center mt-12 md:mt-16'>
+        {/* <div className='flex justify-center mt-12 md:mt-16'>
           <button className='bg-[#C4956B] text-white px-8 py-3 rounded-md hover:bg-[#9D7556] transition-colors font-medium'>
             View More Projects
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   )

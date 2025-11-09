@@ -62,11 +62,11 @@ const Gallery_Home = () => {
         </div>
 
         {/* Optional: View All Button */}
-        <div className='flex justify-center mt-12'>
+        {/* <div className='flex justify-center mt-12'>
           <button className='bg-[#C4956B] text-white px-8 py-3 rounded-md hover:bg-[#9D7556] transition-colors font-medium'>
             View Full Gallery
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   )
