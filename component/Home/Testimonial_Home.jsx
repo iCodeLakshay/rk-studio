@@ -1,8 +1,14 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { createScrollAnimation, animations } from '../../utils/gsap'
 
 const Testimonial_Home = () => {
+  const sectionRef = useRef(null);
+  const badgeRef = useRef(null);
+  const titleRef = useRef(null);
+  const testimonialRef = useRef(null);
+  const controlsRef = useRef(null);
   const testimonials = [
     {
       text: "ViewLight exceeded my expectations with their professionalism and creativity. The photoshoot was fun and relaxed, and the final images were absolutely stunning. I'll be coming back for all my future projects!",
@@ -33,6 +39,36 @@ const Testimonial_Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
 
+  useEffect(() => {
+    // Animate badge
+    if (badgeRef.current) {
+      createScrollAnimation(badgeRef.current, animations.scaleIn, {
+        scrollTrigger: { start: "top 85%" }
+      });
+    }
+
+    // Animate title
+    if (titleRef.current) {
+      createScrollAnimation(titleRef.current, animations.fadeInUp, {
+        scrollTrigger: { start: "top 80%" }
+      });
+    }
+
+    // Animate testimonial content
+    if (testimonialRef.current) {
+      createScrollAnimation(testimonialRef.current, animations.fadeInUp, {
+        scrollTrigger: { start: "top 75%" }
+      });
+    }
+
+    // Animate controls
+    if (controlsRef.current) {
+      createScrollAnimation(controlsRef.current, animations.scaleIn, {
+        scrollTrigger: { start: "top 70%" }
+      });
+    }
+  }, []);
+
   const handlePrev = () => {
     if (isAnimating) return
     setIsAnimating(true)
@@ -52,15 +88,15 @@ const Testimonial_Home = () => {
   }
 
   return (
-    <section className='w-full bg-[#F6F2EC] py-16 md:py-24 px-6 md:px-16 lg:px-24'>
+    <section ref={sectionRef} className='w-full bg-[#F6F2EC] py-16 md:py-24 px-6 md:px-16 lg:px-24'>
       <div className='max-w-7xl mx-auto'>
         <div className='flex flex-col lg:flex-row gap-12 lg:gap-16 items-center lg:items-start'>
           {/* Left Side - Heading */}
           <div className='w-full lg:w-2/5 flex-shrink-0'>
-            <div className='inline-block border-2 border-[#C4956B] rounded-full px-2 md:px-5 md:py-2 mb-6'>
+            <div ref={badgeRef} className='inline-block border-2 border-[#C4956B] rounded-full px-2 md:px-5 md:py-2 mb-6'>
               <span className='text-[#C4956B] text-[10px] md:text-sm tracking-wider font-medium'>TESTIMONIALS</span>
             </div>
-            <h2 className='font-italiana text-[#4A3B35] text-4xl md:text-5xl lg:text-6xl leading-tight'>
+            <h2 ref={titleRef} className='font-italiana text-[#4A3B35] text-4xl md:text-5xl lg:text-6xl leading-tight'>
               THE STORIES<br />
               OF OUR HAPPY<br />
               CLIENTS
@@ -68,7 +104,7 @@ const Testimonial_Home = () => {
           </div>
 
           {/* Right Side - Testimonial Carousel */}
-          <div className='w-full lg:w-3/5 relative'>
+          <div ref={testimonialRef} className='w-full lg:w-3/5 relative'>
             {/* Testimonial Card */}
             <div className='relative overflow-hidden'>
               <div 
@@ -104,7 +140,7 @@ const Testimonial_Home = () => {
                     </div>
 
                     {/* Navigation Arrows */}
-                    <div className='flex gap-3'>
+                    <div ref={controlsRef} className='flex gap-3'>
                       <button 
                         onClick={handlePrev}
                         className='w-12 h-12 rounded-full bg-[#E8E2D8] hover:bg-[#C4956B] text-[#806146] hover:text-white transition-all duration-300 flex items-center justify-center'
